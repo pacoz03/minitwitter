@@ -1,7 +1,7 @@
 
 import apiClient from '@/lib/apiClient';
-import { PostType } from '@/app/components/Post';
-import { CommentType, EnrichedCommentType } from '@/app/components/Comment';
+import { PostType } from '@/app/components/organisms/Post';
+import { CommentType, EnrichedCommentType } from '@/app/components/organisms/Comment';
 
 // Define a common interface for list responses
 interface ListResponse<T> {

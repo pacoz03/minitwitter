@@ -3,10 +3,11 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
-import { PostType } from '@/app/components/Post';
-import Post from '@/app/components/Post';
-import EditPostModal from '@/app/components/EditPostModal';
+import { PostType } from '@/app/components/organisms/Post';
+import Post from '@/app/components/organisms/Post';
+import EditPostModal from '@/app/components/organisms/EditPostModal';
 import { getLikedPosts, toggleLike, deletePost, updatePost } from '@/lib/apiService';
+import EmptyState from '@/app/components/molecules/EmptyState';
 
 const LikesPage = () => {
   const { user, isAuthenticated } = useAuth();
@@ -102,7 +103,7 @@ const LikesPage = () => {
         {error && <p className="p-8 text-center text-red-500">{error}</p>}
         
         {!loading && !error && likedPosts.length === 0 && (
-          <p className="p-12 text-center text-gray-500">Non hai ancora messo "mi piace" a nessun post.</p>
+          <EmptyState message="Non hai ancora messo mi piace a nessun post." />
         )}
 
         {!loading && !error && likedPosts.map((post) => (

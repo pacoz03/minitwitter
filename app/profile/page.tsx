@@ -5,13 +5,15 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { getUserProfileStats, getUserPosts, getLikedPosts, getUserComments, toggleLike, deletePost, updatePost } from '@/lib/apiService';
-import Post, { PostType } from '@/app/components/Post';
+import Post, { PostType } from '@/app/components/organisms/Post';
 import { Button } from '@/components/ui/button';
-import EditPostModal from '@/app/components/EditPostModal';
-import CommentWithPost from '@/app/components/CommentWithPost';
-import { EnrichedCommentType } from '@/app/components/Comment';
+import EditPostModal from '@/app/components/organisms/EditPostModal';
+import CommentWithPost from '@/app/components/organisms/CommentWithPost';
+import { EnrichedCommentType } from '@/app/components/organisms/Comment';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import UserProfileCard from '@/app/components/organisms/UserProfileCard';
 import { Pencil, LogOut } from 'lucide-react';
+import TabButton from '@/app/components/atoms/TabButton';
 
 const ProfilePage = () => {
   const { user, isAuthenticated, logout } = useAuth();
@@ -149,48 +151,7 @@ const ProfilePage = () => {
       </div>
 
       <div className="p-4 space-y-6">
-        <Card className="bg-[#111625] border-gray-800 text-white shadow-lg rounded-xl overflow-hidden">
-            <CardHeader className="pb-4">
-                <CardTitle className="text-lg font-bold">Informazioni utente</CardTitle>
-                <CardDescription className="text-gray-400">I tuoi dati personali</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-                <div className="space-y-1">
-                    <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">Username</p>
-                    <p className="text-base font-semibold">@{user.username}</p>
-                </div>
-                <div className="space-y-1">
-                    <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">Email</p>
-                    <p className="text-base text-gray-200">{user.email}</p>
-                </div>
-                <div className="space-y-1">
-                    <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">Bio</p>
-                    <div className="text-sm">
-                        {user.bio ? (
-                            <p className="text-gray-200">{user.bio}</p>
-                        ) : (
-                            <p className="text-gray-500 italic">Nessuna bio aggiunta. <Link href="/profile/edit" className="text-blue-500 hover:underline not-italic">Aggiungine una!</Link></p>
-                        )}
-                    </div>
-                </div>
-            </CardContent>
-            <div className="px-6 pb-6 flex flex-col gap-3">
-                <Link href="/profile/edit" className="w-full">
-                    <Button className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg">
-                        <Pencil className="mr-2 h-4 w-4" />
-                        Modifica profilo
-                    </Button>
-                </Link>
-                <Button 
-                    variant="destructive" 
-                    onClick={logout}
-                    className="w-full bg-red-900/40 hover:bg-red-900/60 text-red-200 hover:text-red-100 border border-red-900/50 rounded-lg"
-                >
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Esci dall'account
-                </Button>
-            </div>
-        </Card>
+        <UserProfileCard />
       </div>
       
       <div className="border-b border-gray-800 bg-[#020618]">
@@ -235,21 +196,8 @@ const ProfilePage = () => {
   );
 };
 
-const TabButton = ({ isActive, onClick, label, count }: { isActive: boolean, onClick: () => void, label: string, count: number }) => (
-    <button 
-        onClick={onClick}
-        className={`flex-1 py-4 text-center text-sm font-medium transition-colors relative hover:bg-white/5 ${isActive ? 'text-white' : 'text-gray-500 hover:text-gray-300'}`}
-    >
-        <span>{label}</span>
-        <span className="ml-1 text-xs opacity-70">({count})</span>
-        {isActive && <div className="absolute bottom-0 left-0 right-0 h-1 bg-blue-500 rounded-t-full" />}
-    </button>
-);
 
-const EmptyState = ({ message }: { message: string }) => (
-    <div className="p-12 text-center text-gray-500">
-        <p>{message}</p>
-    </div>
-);
+
+import EmptyState from '@/app/components/molecules/EmptyState';
 
 export default ProfilePage;

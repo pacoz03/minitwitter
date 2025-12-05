@@ -7,7 +7,7 @@ import { it } from 'date-fns/locale';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
 import { Heart } from 'lucide-react';
-import { PostType } from './Post';
+import { PostType } from '@/app/components/organisms/Post';
 
 export interface CommentType {
   id: string;
@@ -69,7 +69,7 @@ const Comment = ({ comment }: CommentProps) => {
         </div>
         
         <div 
-          className="text-sm text-gray-300 whitespace-pre-wrap leading-relaxed break-words"
+          className="text-sm text-gray-300 whitespace-pre-wrap leading-relaxed wrap-break-word"
           dangerouslySetInnerHTML={{ __html: formatContentHtml(comment.content) }}
         />
         

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
-import Sidebar from "./components/Sidebar";
-import Navbar from "./components/Navbar";
-import FloatingActionButton from "./components/FloatingActionButton";
+import Sidebar from "./components/organisms/Sidebar";
+import Navbar from "./components/organisms/Navbar";
+import FloatingActionButton from "./components/atoms/FloatingActionButton";
 import Link from "next/link"; // Import Link for the header logo
 
 const geistSans = Geist({

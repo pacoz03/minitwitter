@@ -1,14 +1,14 @@
 'use client';
 
 import React, { useEffect, useState, useCallback, use } from 'react';
-import Post, { PostType } from '@/app/components/Post';
-import Comment, { CommentType } from '@/app/components/Comment';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
+import Post, { PostType } from '@/app/components/organisms/Post';
+import Comment, { CommentType } from '@/app/components/organisms/Comment';
+import CommentForm from '@/app/components/molecules/CommentForm';
 import { useAuth } from '@/context/AuthContext';
 import { getPostDetails, getComments, toggleLike, addComment } from '@/lib/apiService';
 import { ArrowLeft } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import EmptyState from '@/app/components/molecules/EmptyState';
 
 const PostDetailPage = ({ params }: { params: Promise<{ postId: string }> }) => {
   const { postId } = use(params);
@@ -16,7 +16,6 @@ const PostDetailPage = ({ params }: { params: Promise<{ postId: string }> }) => 
   const { user, isAuthenticated } = useAuth();
   const [post, setPost] = useState<PostType | null>(null);
   const [comments, setComments] = useState<CommentType[]>([]);
-  const [newComment, setNewComment] = useState('');
   const [loading, setLoading] = useState(true);
   const [isPublishing, setIsPublishing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -59,25 +58,23 @@ const PostDetailPage = ({ params }: { params: Promise<{ postId: string }> }) => 
     }
   };
 
-  const handleAddComment = async () => {
-    if (!newComment.trim() || !isAuthenticated || !user) return;
+  const handleAddComment = async (content: string) => {
+    if (!isAuthenticated || !user) return;
     
     setIsPublishing(true); 
     try {
-        const createdComment = await addComment(postId, newComment);
+        const createdComment = await addComment(postId, content);
 
         // Optimistic update with user data from context
         const newCommentWithUser: CommentType = {
             ...createdComment,
             user: {
                 id: user.id,
-                username: user.username,
-                image: user.image,
+                username: user.username
             },
         };
         
         setComments(prev => [newCommentWithUser, ...prev]);
-        setNewComment('');
         
         if (post) {
             setPost({ ...post, comments_count: post.comments_count + 1 });
@@ -116,32 +113,11 @@ const PostDetailPage = ({ params }: { params: Promise<{ postId: string }> }) => 
             <Post post={post} onLikeToggle={handleLikeToggle} currentUserId={user?.id} />
 
             {/* Comment Input Section */}
-            <div className="p-4 border-b border-gray-800 bg-gray-900/30">
-              <div className="space-y-3">
-                <Textarea
-                  value={newComment}
-                  onChange={(e) => setNewComment(e.target.value)}
-                  placeholder="Scrivi un commento..."
-                  className="w-full min-h-[100px] bg-gray-950/50 border-gray-700 text-gray-100 placeholder:text-gray-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 resize-none rounded-xl"
-                  disabled={!isAuthenticated || isPublishing}
-                />
-                <div className="flex justify-end">
-                  <Button 
-                    onClick={handleAddComment} 
-                    disabled={!newComment.trim() || !isAuthenticated || isPublishing}
-                    className=" bg-blue-600 hover:bg-blue-500 text-white font-bold px-6"
-                  >
-                    {isPublishing ? (
-                      <>
-                        Pubblicazione...
-                      </>
-                    ) : (
-                      'Commenta'
-                    )}
-                  </Button>
-                </div>
-              </div>
-            </div>
+            <CommentForm 
+                onSubmit={handleAddComment}
+                isPublishing={isPublishing}
+                isAuthenticated={isAuthenticated}
+            />
 
             {/* Comments List */}
             <div className="p-4 space-y-4">
@@ -150,10 +126,10 @@ const PostDetailPage = ({ params }: { params: Promise<{ postId: string }> }) => 
                       <Comment key={comment.id} comment={comment} />
                   ))
               ) : (
-                  <div className="py-12 text-center text-gray-500">
-                    <p>Ancora nessun commento.</p>
-                    <p className="text-sm">Sii il primo a partecipare alla discussione!</p>
-                  </div>
+                  <EmptyState 
+                      message="Ancora nessun commento."
+                      description="Sii il primo a partecipare alla discussione!"
+                  />
               )}
             </div>
           </>

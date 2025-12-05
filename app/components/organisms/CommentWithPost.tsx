@@ -2,10 +2,10 @@
 
 import { formatDistanceToNow } from 'date-fns';
 import { it } from 'date-fns/locale';
-import Post, { PostType } from './Post';
+import Post, { PostType } from '@/app/components/organisms/Post';
 import { MessageCircle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
-import {EnrichedCommentType } from './Comment';
+import { EnrichedCommentType } from '@/app/components/organisms/Comment';
 
 interface CommentWithPostProps {
   enrichedComment: EnrichedCommentType;
