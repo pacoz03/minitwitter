@@ -38,7 +38,7 @@ async function apiClient<T>(
     config.body = JSON.stringify(body);
   }
 
-  const response = await fetch("https://api.twitter.server.jetop.com" + endpoint, config);
+  const response = await fetch("http://localhost:4000" + endpoint, config);
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));

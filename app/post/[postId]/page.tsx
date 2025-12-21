@@ -68,7 +68,7 @@ const PostDetailPage = ({ params }: { params: Promise<{ postId: string }> }) => 
         // Optimistic update with user data from context
         const newCommentWithUser: CommentType = {
             ...createdComment,
-            user: {
+            users: {
                 id: user.id,
                 username: user.username
             },

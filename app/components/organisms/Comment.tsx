@@ -15,7 +15,7 @@ export interface CommentType {
   post_id: string;
   content: string;
   created_at: string;
-  user?: { 
+  users?: { 
     id: string;
     username: string;
     image?: string;
@@ -40,19 +40,20 @@ const formatContentHtml = (text: string) => {
 const Comment = ({ comment }: CommentProps) => {
   // Calcolo tempo
   let timeAgo = formatDistanceToNow(new Date(comment.created_at), { addSuffix: false, locale: it });
-  timeAgo = timeAgo.replace('circa ', ''); // Pulizia stringa
+  timeAgo = timeAgo.replace('circa ', ''); 
 
-  const username = comment.user?.username || 'Utente sconosciuto';
-  const initial = username.charAt(0).toUpperCase();
+  console.log('Rendering comment:', comment);
+
+  const username = comment.users?.username;
 
   return (
     <div className="flex gap-3 items-start animate-in fade-in slide-in-from-bottom-2 duration-300">
       {/* Avatar User */}
       <Link href={`/user/${username}`} className="shrink-0 mt-1">
         <Avatar className="h-8 w-8 border border-gray-700">
-            <AvatarImage src={comment.user?.image} />
+            <AvatarImage src={comment.users?.image} />
             <AvatarFallback className="bg-gray-700 text-xs font-bold text-gray-300">
-                {initial}
+                {username?.charAt(0).toUpperCase()}
             </AvatarFallback>
         </Avatar>
       </Link>
