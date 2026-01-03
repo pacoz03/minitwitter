@@ -42,8 +42,6 @@ const Comment = ({ comment }: CommentProps) => {
   let timeAgo = formatDistanceToNow(new Date(comment.created_at), { addSuffix: false, locale: it });
   timeAgo = timeAgo.replace('circa ', ''); 
 
-  console.log('Rendering comment:', comment);
-
   const username = comment.users?.username;
 
   return (

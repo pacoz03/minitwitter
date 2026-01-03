@@ -71,7 +71,7 @@ const EditProfilePage = () => {
                 type="text"
                 value={user.username}
                 disabled
-                className="bg-[#020618] border-gray-700 text-gray-500 cursor-not-allowed focus-visible:ring-0"
+                className=" border-gray-700 text-gray-500 cursor-not-allowed focus-visible:ring-0"
               />
             </div>
 
@@ -83,7 +83,7 @@ const EditProfilePage = () => {
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 rows={6}
-                className="bg-[#0b101b] border-gray-700 text-gray-200 resize-none focus-visible:ring-blue-600 focus-visible:border-blue-600"
+                className=" border-gray-700 text-gray-200 resize-none focus-visible:ring-blue-600 focus-visible:border-blue-600"
                 placeholder="Raccontaci qualcosa di te..."
               />
             </div>

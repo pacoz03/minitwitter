@@ -50,7 +50,7 @@ const Setup2FAPage = () => {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#020618] p-4 text-white">
+    <div className="flex min-h-screen items-center justify-center  p-4 text-white">
       <Card className="w-full max-w-lg border-gray-800 bg-gray-900 shadow-xl">
         <CardHeader className="text-center pb-2">
           <CardTitle className="text-2xl font-bold text-white">Registrazione completata! 🎉</CardTitle>

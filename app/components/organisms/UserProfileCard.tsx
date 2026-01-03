@@ -50,7 +50,7 @@ const UserProfileCard = () => {
                     className="w-full bg-red-900/40 hover:bg-red-900/60 text-red-200 hover:text-red-100 border border-red-900/50 rounded-lg"
                 >
                     <LogOut className="mr-2 h-4 w-4" />
-                    Esci dall'account
+                    Esci dall&apos;account
                 </Button>
             </div>
         </Card>

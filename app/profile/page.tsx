@@ -154,7 +154,7 @@ const ProfilePage = () => {
         <UserProfileCard />
       </div>
       
-      <div className="border-b border-gray-800 bg-[#020618]">
+      <div className="border-b border-gray-800 ">
         <div className="flex">
             <TabButton isActive={activeTab === 'posts'} onClick={() => setActiveTab('posts')} label="Post" count={stats.posts} />
             <TabButton isActive={activeTab === 'comments'} onClick={() => setActiveTab('comments')} label="Commenti" count={stats.comments} />

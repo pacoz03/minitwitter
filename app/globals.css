@@ -79,8 +79,8 @@
 }
 
 .dark {
-        --background: lab(1.76974% 1.32743 -9.28855);
-        --foreground: lab(98.1434% -.369519 -1.05966);
+        --background: #000617;
+        --foreground: #f8fafc;
         --card: lab(7.78673% 1.82345 -15.0537);
         --card-foreground: lab(98.1434% -.369519 -1.05966);
         --popover: lab(7.78673% 1.82345 -15.0537);

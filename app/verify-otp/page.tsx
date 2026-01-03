@@ -53,7 +53,7 @@ const VerifyOtpPage = () => {
   };
 
   return (
-    <div className="flex h-screen w-full items-center justify-center bg-[#020618] p-4">
+    <div className="flex h-screen w-full items-center justify-center  p-4">
       <Card className="w-full max-w-sm border-gray-800 bg-gray-900 text-white shadow-lg">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">Verifica OTP</CardTitle>
